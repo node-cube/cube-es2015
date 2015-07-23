@@ -1,6 +1,5 @@
 var path = require('path');
-var fs = require('fs');
-var jsx = require('./JSXTransformer');
+var simple = require('jstransform/simple');
 
 var JSXProcessor = function (cube) {
   this.cube = cube;
@@ -16,8 +15,7 @@ JSXProcessor.prototype = {
     var root = options.root;
 
     try {
-      code = fs.readFileSync(path.join(root, file), 'utf8');
-      code = jsx.transform(code).code;
+      code = simple.transformFileSync(path.join(root, file), {react: true}).code;
     } catch (e) {
       return callback(e);
     }
@@ -28,7 +26,7 @@ JSXProcessor.prototype = {
       file = file.replace(/\.jsx/g, '.js');
       options.qpath = file;
     }
-    this.cube.processJsCode.call(this.cube, file, code, options, callback);
+    this.cube.processJsCode(file, code, options, callback);
   }
 };
 
