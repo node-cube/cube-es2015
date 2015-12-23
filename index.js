@@ -1,13 +1,15 @@
+/*!
+ * cube-jsx: index.js
+ */
 var path = require('path');
 var simple = require('jstransform/simple');
 
 var JSXProcessor = function (cube) {
   this.cube = cube;
 };
-JSXProcessor.info = {
-  type: 'script',
-  ext: '.jsx'
-};
+
+JSXProcessor.type = 'script';
+JSXProcessor.ext = '.jsx';
 
 JSXProcessor.prototype = {
   process: function (file, options, callback) {

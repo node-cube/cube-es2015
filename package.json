@@ -1,6 +1,6 @@
 {
   "name": "cube-jsx",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "cube jsx processor",
   "main": "index.js",
   "scripts": {
