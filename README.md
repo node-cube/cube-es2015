@@ -1,7 +1,5 @@
-# cube-jsx
+# cube-es2015
 
 ## install
 
-## TODO
 
-+ add tests

@@ -1,35 +1,43 @@
 /*!
  * cube-jsx: index.js
  */
-var path = require('path');
-var simple = require('jstransform/simple');
+'use strict';
 
-var JSXProcessor = function (cube) {
+const path = require('path');
+const babelCore = require('babel-core');
+
+const ES2015Processor = function (cube) {
   this.cube = cube;
 };
 
-JSXProcessor.type = 'script';
-JSXProcessor.ext = '.jsx';
+ES2015Processor.type = 'script';
+ES2015Processor.ext = '.js';
 
-JSXProcessor.prototype = {
-  process: function (file, options, callback) {
-    var code;
-    var root = options.root;
-
-    try {
-      code = simple.transformFileSync(path.join(root, file), {react: true}).code;
-    } catch (e) {
-      return callback(e);
-    }
-    if (!options.moduleWrap) {
-      return callback(null, {source: code, code: code});
-    }
-    if (options.release) {
-      file = file.replace(/\.jsx/g, '.js');
-      options.qpath = file;
-    }
-    this.cube.processJsCode(file, code, options, callback);
+ES2015Processor.prototype.process = function (data, callback) {
+  let code = data.code;
+  let root = data.root;
+  let res;
+  try {
+    res = babelCore.transform(code, {
+      ast: true,
+      code: true,
+      plugins: [
+        ["transform-runtime", {
+          "polyfill": false,
+          "regenerator": true
+        }]
+      ],
+      presets: [
+        'es2015'
+      ]
+    });
+  } catch (e) {
+    e.message = 'transform to es2015 error, ' + e.message;
+    return callback(e);
   }
+  data.code = res.code;
+  callback(null, data);
 };
 
-module.exports = JSXProcessor;
+
+module.exports = ES2015Processor;
