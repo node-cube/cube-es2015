@@ -5,6 +5,8 @@
 
 const path = require('path');
 const babelCore = require('babel-core');
+const babelPluginTransformRuntime = require('babel-plugin-transform-runtime');
+const babelPresetEs2015 = require('babel-preset-es2015');
 
 const ES2015Processor = function (cube) {
   this.cube = cube;
@@ -22,13 +24,13 @@ ES2015Processor.prototype.process = function (data, callback) {
       ast: true,
       code: true,
       plugins: [
-        ["transform-runtime", {
+        [babelPluginTransformRuntime, {
           "polyfill": false,
           "regenerator": true
         }]
       ],
       presets: [
-        'es2015'
+        babelPresetEs2015
       ]
     });
   } catch (e) {
