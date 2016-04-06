@@ -13,7 +13,7 @@ const ES2015Processor = function (cube) {
 };
 
 ES2015Processor.type = 'script';
-ES2015Processor.ext = '.js';
+ES2015Processor.ext = '.*';
 
 ES2015Processor.prototype.process = function (data, callback) {
   let code = data.code;
