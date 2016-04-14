@@ -8,7 +8,7 @@ const babelCore = require('babel-core');
 const babelPluginTransformRuntime = require('babel-plugin-transform-runtime');
 const babelPresetEs2015 = require('babel-preset-es2015');
 
-const ES2015Processor = function (cube) {
+function ES2015Processor(cube) {
   this.cube = cube;
 };
 
