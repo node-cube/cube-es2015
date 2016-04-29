@@ -45,7 +45,7 @@ ES2015Processor.prototype.process = function (data, callback) {
         require('babel-plugin-transform-es2015-destructuring'),
         require('babel-plugin-transform-es2015-block-scoping'),
         require('babel-plugin-transform-es2015-typeof-symbol'),
-        [require('babel-plugin-transform-es2015-modules-commonjs'), {strict : flagStrict || false}],
+        [require('babel-plugin-transform-es2015-modules-commonjs'), {strict : flagStrict || false, allowTopLevelThis: true}],
         [require('babel-plugin-transform-regenerator'), {async: false, asyncGenerators: false}]
       ]
     });
