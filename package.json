@@ -1,6 +1,6 @@
 {
   "name": "cube-es2015",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "cube es2015 processor",
   "main": "index.js",
   "scripts": {
